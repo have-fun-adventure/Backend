@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require('express');
 const port = 3000;
 const logger = require('morgan');
@@ -28,6 +30,11 @@ app.use('/list', listController);
 
 const tripController = require('./controllers/tripControllers');
 app.use('/trip', tripController);
+
+
+const authController = require("./controllers/authController");
+app.use("/api/", authController);
+
 
 
 app.listen(port, () => {
