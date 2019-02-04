@@ -18,7 +18,7 @@ router.post("/auth", user.findEmail, user.login, (req, res) => {
   } else {
     const { email, name, id } = req.user;
 
-    const token = jwt.sign({ email, name, id }, process.env.JWT_KEY);
+    const token = jwt.sign({ email, name, id }, process.env.JWT_KEY || "Aisha");
 
     res.send({ token });
   }
