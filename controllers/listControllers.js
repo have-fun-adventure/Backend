@@ -13,7 +13,7 @@ router.post('/', list.create, sendNewList);
 router.put('/:id', list.update, sendUpdateList);
 router.get('/:id', list.find, sendList);
 router.get('/:id', list.findByUser, sendList);
-router.get('/:id', list.findByActivity, sendList);
+router.get('/:activity_id', list.findByActivity, sendList);
 
 
 
