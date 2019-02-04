@@ -41,6 +41,18 @@ list.update = function (req, res, next) {
     })
 }
 
+list.delete = function (req, res, next) {
+  db.none('DELETE FROM list WHERE id=$1;', [req.params.id])
+    .then(()=>{
+      console.log('successful delete');
+      next();
+    })
+    .catch(error => {
+      console.log(error); 
+      next();
+    })
+}
+
 list.findByUser = function (req, res, next) {
   db.manyOrNone("SELECT  users.id  from users ,list WHERE list.user_id =$1 and users.id=list.user_id = RETURNING *;",
     [ req.params.id])
