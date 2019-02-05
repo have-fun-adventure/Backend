@@ -55,7 +55,7 @@ user.find = function (req, res, next) {
 }
 
 user.update = function (req, res, next) {
-  db.one("UPDATE users SET username=$1, firstname=$2, lastname=$3 email=$4,password=$5, phone=$6 , gender=$7,location=$8, WHERE id=$9 RETURNING *;",
+  db.one("UPDATE users SET username=$1, firstname=$2, lastname=$3, email=$4, password=$5, phone=$6 , gender=$7,location=$8, WHERE id=$9 RETURNING *;",
     [req.body.username, req.body.firstname, req.body.lastname, req.body.email,req.body.password, req.body.phone,req.body.gender,req.body.location, req.params.id])
     .then(result => {
       res.locals.user = result;

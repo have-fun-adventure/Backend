@@ -67,7 +67,7 @@ list.findByUser = function (req, res, next) {
 }
 
 list.findByActivity = function (req, res, next) {
-  db.manyOrNone("SELECT  * from activity ,list WHERE list.activity_id =$1 and activity.id=$1;",
+  db.manyOrNone("SELECT  * from activity, list WHERE list.activity_id =$1 and activity.id=$1;",
     [req.params.activity_id])
     .then(result => {
       res.locals.lists = [result];

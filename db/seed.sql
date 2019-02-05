@@ -17,6 +17,7 @@ CREATE TABLE users
   is_admin boolean DEFAULT 'f'
 );
 
+
 CREATE TABLE activity
 (
   id SERIAL PRIMARY KEY,
@@ -42,18 +43,16 @@ CREATE TABLE list
   FOREIGN KEY (user_id) REFERENCES users ON DELETE CASCADE
 );
 
--- INSERT INTO users
---   (id,username,firstname ,lastname ,email,password ,phone ,gender,location )
--- VALUES
---   (1,'1a', 'a', 'a', 'a@a', 'a', '11', 'f', 'a');
--- INSERT INTO activity
---   (id ,title, description, time, location, date , image ,user_id)
--- VALUES
---   (1,'a', 'a', 'a', 'a', 'a', 'a', 1);
-
--- INSERT INTO list
---   (id,name, note, activity_id, user_id)
--- VALUES
---   (1,'a', 'a', 1, 1);
+CREATE TABLE usersActivity
+(
+  id SERIAL PRIMARY KEY,
+  activity_id int NOT NULL,
+  FOREIGN KEY (activity_id) REFERENCES activity ON DELETE CASCADE,
+  user_id int NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users ON DELETE CASCADE
+);
 
 
+
+ 
+ 
