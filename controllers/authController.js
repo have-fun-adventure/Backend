@@ -26,16 +26,13 @@ router.post("/", user.findEmail, user.login, (req, res) => {
   }
 });
 
-router.post("/siginup", user.findEmail, user.create, (req, res) => {
+router.post("/signup", user.findEmail, user.create, (req, res) => {
   if (res.user) {
     res.status(400).send("user is already reigister");
   } else {
     const { email, name, id } = req.user;
 
-    // const email = req.user.email ;
-    // const name = req.user.name ;
-
-    const token = jwt.sign({ email, name, id }, process.env.JWT_KEY);
+    const token = jwt.sign({ email, name, id }, process.env.JWT_KEY || "Aisha");
 
     res.send({ token });
   }

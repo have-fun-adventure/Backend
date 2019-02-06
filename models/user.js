@@ -27,12 +27,18 @@ user.findEmail = (req, res, next) => {
       next();
     });
 };
+
+
+
+
 user.create = function (req, res, next) {
+  console.log("\n\n\n\n\n\n\n", req.body)
+
   const salt = bcrypt.genSaltSync(10);
   db.one("INSERT INTO users (username, firstname, lastname, email,password, phone , gender ,location) VALUES($1, $2, $3, $4, $5 ,$6 ,$7 ,$8) RETURNING *;",
     [req.body.username.toLowerCase(), req.body.firstname, req.body.lastname, req.body.email.toLowerCase(), bcrypt.hashSync(req.body.password, salt), req.body.phone, req.body.gender, req.body.location])
     .then(result => {
-      res.locals.user = result;
+      req.user = result;
       next()
     })
     .catch(error => {
