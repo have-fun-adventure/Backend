@@ -71,7 +71,7 @@ activity.findByUser = function (req, res, next) {
 
 activity.createUser = function (req, res, next) {
   console.log(req);
-  db.one("INSERT INTO usersActivity (activity_id,user_id) VALUES($1, $2) RETURNING *;",
+  db.one("INSERT INTO usersActivity (activity_id, user_id) VALUES($1, $2) RETURNING *;",
     [req.body.activity_id, req.body.user_id])
     .then(result => {
       res.locals.activity = result;
@@ -81,9 +81,11 @@ activity.createUser = function (req, res, next) {
       console.log(error);
       next();
     })
-  }
+}
 
 activity.allUsersActivity = function (req, res, next) {
+  console.log('**********');
+  console.log(req.body);
   db.manyOrNone("SELECT username from usersActivity, users  WHERE usersActivity.user_id = users.id and usersActivity.activity_id=$1;",
     [req.params.activity_id])
     .then(result => {
