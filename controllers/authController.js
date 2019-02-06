@@ -12,10 +12,12 @@ router.get("/auth", auth, (req, res) => {
   res.send("authenticated");
 });
 
-router.post("/auth", user.findEmail, user.login, (req, res) => {
-  if (!res.user) {
+router.post("/", user.findEmail, user.login, (req, res) => {
+  if (!req.user) {
     res.status(400).send("invalid email or password");
   } else {
+
+    console.log(req.user)
     const { email, name, id } = req.user;
 
     const token = jwt.sign({ email, name, id }, process.env.JWT_KEY || "Aisha");
@@ -24,7 +26,7 @@ router.post("/auth", user.findEmail, user.login, (req, res) => {
   }
 });
 
-router.post("/user", user.findEmail, user.create, (req, res) => {
+router.post("/siginup", user.findEmail, user.create, (req, res) => {
   if (res.user) {
     res.status(400).send("user is already reigister");
   } else {

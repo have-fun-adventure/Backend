@@ -28,9 +28,8 @@ app.use('/activity', activityController);
 const listController = require('./controllers/listControllers');
 app.use('/list', listController);
 
-
 const authController = require("./controllers/authController");
-app.use("/api/", authController);
+app.use("/auth", authController);
 
 
 
